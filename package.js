@@ -1,10 +1,8 @@
 Package.describe({
     name: 'haojia321:flash-message-toast',
     version: '0.0.1',
-    // Brief, one-line summary of the package.
-    summary: '',
-    // URL to the Git repository containing the source code for this package.
-    git: '',
+    summary: 'A package to display flash message or toast message.',
+    git: 'https://github.com/haojia321/flash-message-toast',
     // By default, Meteor will default to using README.md for documentation.
     // To avoid submitting documentation, set this field to null.
     documentation: 'README.md'
@@ -13,7 +11,8 @@ Package.describe({
 Package.onUse(function(api) {
     api.versionsFrom('1.4.2.7');
     api.use('ecmascript');
-    api.use('fourseven:scss');
+    api.use('jquery');
+    api.use('fourseven:scss@3.13.0');
     api.mainModule('flash-message-toast.js');
     api.addFiles('flash-message-toast.scss', 'client');
 });
