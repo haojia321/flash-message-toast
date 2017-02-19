@@ -1,0 +1,193 @@
+.flashMessageOverlay {
+    &.centerAlign .flashMessageWrapper {
+        padding-left: 25%;
+        padding-right: 25%;
+        @media (max-width: 992px) {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+    }
+    &.rightAlign .flashMessageWrapper {
+        right: 5%;
+        left: inherit;
+        width: 50%;
+        @media (max-width: 992px) {
+            width: 90%;
+        }
+    }
+    &.leftAlign .flashMessageWrapper {
+        left: 5%;
+        right: inherit;
+        @media (max-width: 992px) {
+            width: 90%;
+        }
+    }
+    &.topAlign .flashMessageWrapper {
+        top: 10%;
+    }
+    &.bottomAlign .flashMessageWrapper {
+        bottom: 10%;
+    }
+    .flashMessageWrapper {
+        min-width: 10rem;
+        width: 100%;
+        max-height: 80%;
+        text-align: center;
+        color: #fff;
+        opacity: .95;
+        position: fixed;
+        z-index: 999;
+        top: inherit;
+        left: inherit;
+        .flashMessage {
+            font-size: 1rem;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+            padding: 1rem .5rem;
+        }
+        .flashMessage.flashMessageToast {
+            background-color: #323232;
+        }
+        .flashMessage.flashMessageSuccess {
+            background-color: #00be9d;
+        }
+        .flashMessage.flashMessageError {
+            background-color: #f35f62;
+        }
+        .flashMessage.flashMessageWarning {
+            background-color: #f7c32c;
+        }
+    }
+    &.flashMessageSlideDownToShow .flashMessageWrapper {
+        animation: flashMessageSlideDownToShow .3s ease-out;
+    }
+    &.flashMessageSlideUpToHide .flashMessageWrapper {
+        animation: flashMessageSlideUpToHide .3s ease-in;
+    }
+    &.flashMessageSlideUpToShow .flashMessageWrapper {
+        animation: flashMessageSlideUpToShow .3s ease-out;
+    }
+    &.flashMessageSlideUpDownToHide .flashMessageWrapper {
+        animation: flashMessageSlideUpDownToHide .3s ease-in;
+    }
+    &.flashMessageSlideLeftToShow .flashMessageWrapper {
+        animation: flashMessageSlideLeftToShow .3s ease-out;
+    }
+    &.flashMessageSlideRightToHide .flashMessageWrapper {
+        animation: flashMessageSlideRightToHide .3s ease-in;
+    }
+    &.flashMessageSlideRightToShow .flashMessageWrapper {
+        animation: flashMessageSlideRightToShow .3s ease-out;
+    }
+    &.flashMessageSlideLeftToHide .flashMessageWrapper {
+        animation: flashMessageSlideLeftToHide .3s ease-in;
+    }
+    @keyframes flashMessageSlideDownToShow {
+        0% {
+            top: -100%;
+            opacity: 0;
+        }
+        60% {
+            top: 15%;
+            opacity: 1;
+        }
+        100% {
+            top: 10%;
+        }
+    }
+    @keyframes flashMessageSlideUpToHide {
+        0% {
+            top: 10%;
+            opacity: 1;
+        }
+        40% {
+            top: 13%;
+        }
+        100% {
+            top: -100%;
+            opacity: 0;
+        }
+    }
+    @keyframes flashMessageSlideUpToShow {
+        0% {
+            bottom: -100%;
+            opacity: 0;
+        }
+        60% {
+            bottom: 15%;
+            opacity: 1;
+        }
+        100% {
+            bottom: 10%;
+        }
+    }
+    @keyframes flashMessageSlideUpDownToHide {
+        0% {
+            bottom: 10%;
+            opacity: 1;
+        }
+        40% {
+            bottom: 13%;
+        }
+        100% {
+            bottom: -100%;
+            opacity: 0;
+        }
+    }
+    @keyframes flashMessageSlideLeftToShow {
+        0% {
+            right: -100%;
+            opacity: 0;
+        }
+        90% {
+            right: calc(10% + 3rem);
+            opacity: .5;
+        }
+        100% {
+            right: 10%;
+            opacity: 1;
+        }
+    }
+    @keyframes flashMessageSlideRightToHide {
+        0% {
+            right: 10%;
+            opacity: 1;
+        }
+        10% {
+            right: calc(10% + 3rem);
+            opacity: .5;
+        }
+        100% {
+            right: -100%;
+            opacity: 0;
+        }
+    }
+    @keyframes flashMessageSlideRightToShow {
+        0% {
+            left: -100%;
+            opacity: 0;
+        }
+        90% {
+            left: calc(10% + 3rem);
+            opacity: .5;
+        }
+        100% {
+            left: 10%;
+            opacity: 1;
+        }
+    }
+    @keyframes flashMessageSlideLeftToHide {
+        0% {
+            left: 10%;
+            opacity: 1;
+        }
+        10% {
+            left: calc(10% + 3rem);
+            opacity: .5;
+        }
+        100% {
+            left: -100%;
+            opacity: 0;
+        }
+    }
+}
