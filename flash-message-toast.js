@@ -57,7 +57,7 @@ export const name = 'flash-message-toast';
         var hideDelay = obj.hideDelay || 2000;
         var text = obj.text || 'hello world';
         var type = styleMap[obj.type] || styleMap.info;
-        var autoHide = obj.autoHide || true;
+        var autoHide = obj.autoHide == undefined ? true : obj.autoHide;
         var html = [];
         html.push('<div id="', id, '" class="flashMessageOverlay ', css, '" data-align-type="', obj.align, '">');
         html.push('<div class="flashMessageWrapper">');
