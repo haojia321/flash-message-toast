@@ -4,14 +4,14 @@ Package for displaying flash message or toast message to the user with preset an
 You can see `demo` from here.
 
 ## Usage
-    import { Message } from 'meteor/haojia321:flash-message-toast';   
-    Message.show({  
+    import { FlashMessage } from 'meteor/haojia321:flash-message-toast';   
+    FlashMessage.show({  
         align: 'bottomCenter',  
         text: 'Hello World!'  
     });  
 
 ## API
-### Message.show(options);  
+### FlashMessage.show(options);  
 Argument: options Object
 * **align** _String_  
 Optional. Define how you want to align your message container.   
