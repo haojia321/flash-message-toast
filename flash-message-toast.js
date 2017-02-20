@@ -1,7 +1,3 @@
-// Write your package code here!
-
-// Variables exported by this module can be imported by other packages and
-// applications. See flash-message-toast-tests.js for an example of importing.
 export const name = 'flash-message-toast';
 
 (function() {
@@ -59,14 +55,20 @@ export const name = 'flash-message-toast';
         var type = styleMap[obj.type] || styleMap.info;
         var autoHide = obj.autoHide == undefined ? true : obj.autoHide;
         var html = [];
-        html.push('<div id="', id, '" class="flashMessageOverlay ', css, '" data-align-type="', obj.align, '">');
+        html.push('<div id="', id, '" class="flashMessageToast flashMessageOverlay ', css, '" data-align-type="', obj.align, '">');
         html.push('<div class="flashMessageWrapper">');
         html.push('<div class="flashMessage ', type, '">');
         html.push(text);
-        html.push('</html>');
-        html.push('</html>');
-        html.push('</html>');
+        html.push('</div>');
+        html.push('</div>');
+        html.push('</div>');
+        if (obj.beforeShow) {
+            obj.beforeShow.call(this, obj);
+        }
         $('body').append(html.join(''));
+        if (obj.afterShow) {
+            obj.afterShow.call(this, obj);
+        }
         if (autoHide) {
             setTimeout(function() {
                 FlashMessage.hide(id, obj);
@@ -74,14 +76,20 @@ export const name = 'flash-message-toast';
         }
         return id;
     };
-    FlashMessage.hide = function(id) {
-        var timeout = parseFloat($('#' + id + '> .flashMessageWrapper').css('animationDuration').substring(0, $('#' + id + '> .flashMessageWrapper').css('animationDuration').length - 1)) * 1000;
+    FlashMessage.hide = function(id, obj) {
+        var animationDuration = parseFloat($('#' + id + '> .flashMessageWrapper').css('animationDuration').substring(0, $('#' + id + '> .flashMessageWrapper').css('animationDuration').length - 1)) * 1000;
         var alignType = $('#' + id).data('align-type');
+        if (obj.beforeHide) {
+            obj.beforeHide.call(this, id, obj);
+        }
         if (alignType) {
             $('#' + id).removeClass(animationStyleMap[alignType].show).addClass(animationStyleMap[alignType].hide);
         }
         setTimeout(function() {
             $('#' + id).remove();
-        }, timeout);
+            if (obj.afterHide) {
+                obj.afterHide.call(this, id, obj);
+            }
+        }, animationDuration);
     };
 })();
