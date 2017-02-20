@@ -1,7 +1,7 @@
 # flash-message-toast
 Package for displaying flash message or toast message to the user with preset animation.
 
-You can see [Demo](https://haojia.herokuapp.com/flash-message-toast) from here.
+You can see [Demo](http://www.haojia.space/flash-message-toast) from here.
 
 ## Usage
     import { Message } from 'meteor/haojia321:flash-message-toast';   

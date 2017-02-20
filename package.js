@@ -1,7 +1,7 @@
 Package.describe({
     name: 'haojia321:flash-message-toast',
-    version: '0.0.7',
-    summary: 'A package to display flash message or toast message.',
+    version: '0.0.8',
+    summary: 'Responsive and Material Design. A package to display flash message or toast message.',
     git: 'https://github.com/haojia321/flash-message-toast',
     // By default, Meteor will default to using README.md for documentation.
     // To avoid submitting documentation, set this field to null.
