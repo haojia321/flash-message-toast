@@ -42,13 +42,19 @@ export const name = 'flash-message-toast';
             hide: 'flashMessageSlideLeftToHide'
         }
     };
-    //align: topRight topLeft topCenter bottomRight bottomLeft bottomCenter
+    //align: topRight topLeft topCenter bottomRight bottomLeft bottomCenter. default topCenter
     //autoHide: boolean
     //hideDelay: ms
     //text: string
+    //isHtml: boolean
     //type: string[info, error, success, warning]
+    //beforeShow: function
+    //afterShow: function
+    //beforeHide: function
+    //afterHide: function
+    //showCloseButton: boolean default false
     FlashMessage.show = function(obj) {
-        var css = styleMap[obj.align] + ' ' + animationStyleMap[obj.align].show;
+        var css = getFlashMessageCssClass(obj);
         var id = new Date().getTime() + 'flashMessage';
         var hideDelay = obj.hideDelay || 2000;
         var text = obj.text || 'hello world';
@@ -57,15 +63,30 @@ export const name = 'flash-message-toast';
         var html = [];
         html.push('<div id="', id, '" class="flashMessageToast flashMessageOverlay ', css, '" data-align-type="', obj.align, '">');
         html.push('<div class="flashMessageWrapper">');
-        html.push('<div class="flashMessage ', type, '">');
-        html.push(text);
+        html.push('<div class="flashMessage ', type);
+        if (obj.showCloseButton) {
+            html.push(' hasCloseButton');
+        }
+        html.push('">');
+        if (obj.showCloseButton) {
+            html.push('<a class="flashMessageClose" data-id="', id, '" tabindex="0"></a>');
+        }
+        if (obj.isHtml) {
+            html.push(text);
+        } else {
+            html.push($('<div/>').text(text).html());
+        }
         html.push('</div>');
         html.push('</div>');
         html.push('</div>');
         if (obj.beforeShow) {
             obj.beforeShow.call(this, obj);
         }
-        $('body').append(html.join(''));
+        var a = $('body').append(html.join(''));
+        $('#' + id + ' .flashMessageClose').on('click', function(e) {
+            e.preventDefault();
+            FlashMessage.hide(id, obj);
+        });
         if (obj.afterShow) {
             obj.afterShow.call(this, obj);
         }
@@ -77,19 +98,30 @@ export const name = 'flash-message-toast';
         return id;
     };
     FlashMessage.hide = function(id, obj) {
-        var animationDuration = parseFloat($('#' + id + '> .flashMessageWrapper').css('animationDuration').substring(0, $('#' + id + '> .flashMessageWrapper').css('animationDuration').length - 1)) * 1000;
-        var alignType = $('#' + id).data('align-type');
-        if (obj.beforeHide) {
-            obj.beforeHide.call(this, id, obj);
-        }
-        if (alignType) {
-            $('#' + id).removeClass(animationStyleMap[alignType].show).addClass(animationStyleMap[alignType].hide);
-        }
-        setTimeout(function() {
-            $('#' + id).remove();
-            if (obj.afterHide) {
-                obj.afterHide.call(this, id, obj);
+        if (!$('#' + id).hasClass('lockFlashMessageToast')) {
+            $('#' + id).addClass('lockFlashMessageToast');
+            var animationDuration = parseFloat($('#' + id + '> .flashMessageWrapper').css('animationDuration').substring(0, $('#' + id + '> .flashMessageWrapper').css('animationDuration').length - 1)) * 1000;
+            var alignType = $('#' + id).data('align-type');
+            if (obj.beforeHide) {
+                obj.beforeHide.call(this, id, obj);
             }
-        }, animationDuration);
+            if (alignType) {
+                var removeClass = animationStyleMap[alignType] ? animationStyleMap[alignType].show : null;
+                var addClass = animationStyleMap[alignType] ? animationStyleMap[alignType].hide : null;
+                $('#' + id).removeClass(removeClass).addClass(addClass);
+            }
+            setTimeout(function() {
+                $('#' + id).remove();
+                if (obj.afterHide) {
+                    obj.afterHide.call(this, id, obj);
+                }
+            }, animationDuration);
+        }
     };
+
+    function getFlashMessageCssClass(obj) {
+        var alignCss = styleMap[obj.align] || styleMap['topCenter'];
+        var animationCss = animationStyleMap[obj.align] ? animationStyleMap[obj.align].show : animationStyleMap['topCenter'];
+        return alignCss + ' ' + animationCss;
+    }
 })();

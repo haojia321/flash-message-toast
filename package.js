@@ -1,6 +1,6 @@
 Package.describe({
     name: 'haojia321:flash-message-toast',
-    version: '0.0.9',
+    version: '0.0.10',
     summary: 'Responsive and Material Design. A package to display flash message or toast message.',
     git: 'https://github.com/haojia321/flash-message-toast',
     documentation: 'README.md'
@@ -13,6 +13,7 @@ Package.onUse(function(api) {
     api.use('fourseven:scss@3.13.0');
     api.mainModule('flash-message-toast.js');
     api.addFiles('flash-message-toast.scss', 'client');
+    api.addAssets('close.png', 'client');
 });
 
 Package.onTest(function(api) {

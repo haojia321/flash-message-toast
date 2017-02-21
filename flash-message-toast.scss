@@ -46,6 +46,25 @@
             box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
             border-radius: 2px;
             padding: 1rem .5rem;
+            position: relative;
+            &.hasCloseButton {
+                padding: 1rem 2rem 1rem .5rem;
+            }
+            .flashMessageClose {
+                width: 1rem;
+                height: 1rem;
+                position: absolute;
+                top: .5rem;
+                right: .5rem;
+                cursor: pointer;
+                background-image: url(close.png);
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+            .flashMessageClose:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
         }
         .flashMessage.flashMessageToast {
             background-color: #323232;
@@ -65,24 +84,28 @@
     }
     &.flashMessageSlideUpToHide .flashMessageWrapper {
         animation: flashMessageSlideUpToHide .3s ease-in;
+        opacity: 0;
     }
     &.flashMessageSlideUpToShow .flashMessageWrapper {
         animation: flashMessageSlideUpToShow .3s ease-out;
     }
     &.flashMessageSlideUpDownToHide .flashMessageWrapper {
         animation: flashMessageSlideUpDownToHide .3s ease-in;
+        opacity: 0;
     }
     &.flashMessageSlideLeftToShow .flashMessageWrapper {
         animation: flashMessageSlideLeftToShow .3s ease-out;
     }
     &.flashMessageSlideRightToHide .flashMessageWrapper {
         animation: flashMessageSlideRightToHide .3s ease-in;
+        opacity: 0;
     }
     &.flashMessageSlideRightToShow .flashMessageWrapper {
         animation: flashMessageSlideRightToShow .3s ease-out;
     }
     &.flashMessageSlideLeftToHide .flashMessageWrapper {
         animation: flashMessageSlideLeftToHide .3s ease-in;
+        opacity: 0;
     }
     @keyframes flashMessageSlideDownToShow {
         0% {
