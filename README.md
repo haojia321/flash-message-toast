@@ -1,5 +1,6 @@
 # flash-message-toast
-Package for displaying flash message or toast message to the user with preset animation.
+Responsive and Material Design. A package to display flash message or toast message.  
+Other flash message package usually depends on other UI framework like Bootstrap or Materialize. This could cause some conflict to your project. This package doesn't depend on any UI package or UI framework. So you don't need to worry about the conflict to your projects.
 
 You can see demo from [Location1](http://www.haojia.space/flash-message-toast) or [Location2](https://haojia.herokuapp.com/flash-message-toast).
 

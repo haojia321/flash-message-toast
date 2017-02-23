@@ -80,31 +80,36 @@ export const name = 'flash-message-toast';
         html.push('</div>');
         html.push('</div>');
         if (obj.beforeShow) {
-            obj.beforeShow.call(this, obj);
+            obj.beforeShow.call(this, id, obj);
         }
         var a = $('body').append(html.join(''));
         $('#' + id + ' .flashMessageClose').on('click', function(e) {
             e.preventDefault();
             FlashMessage.hide(id, obj);
         });
+        var animationDuration = parseFloat($('#' + id + '> .flashMessageWrapper').css('animationDuration').substring(0, $('#' + id + '> .flashMessageWrapper').css('animationDuration').length - 1)) * 1000;
+
         if (obj.afterShow) {
-            obj.afterShow.call(this, obj);
+            setTimeout(function() {
+                obj.afterShow.call(this, id, obj);
+            }, animationDuration);
         }
         if (autoHide) {
             setTimeout(function() {
                 FlashMessage.hide(id, obj);
-            }, hideDelay);
+            }, hideDelay + animationDuration);
         }
         return id;
     };
     FlashMessage.hide = function(id, obj) {
         if (!$('#' + id).hasClass('lockFlashMessageToast')) {
             $('#' + id).addClass('lockFlashMessageToast');
-            var animationDuration = parseFloat($('#' + id + '> .flashMessageWrapper').css('animationDuration').substring(0, $('#' + id + '> .flashMessageWrapper').css('animationDuration').length - 1)) * 1000;
-            var alignType = $('#' + id).data('align-type');
             if (obj.beforeHide) {
                 obj.beforeHide.call(this, id, obj);
             }
+            var animationDuration = parseFloat($('#' + id + '> .flashMessageWrapper').css('animationDuration').substring(0, $('#' + id + '> .flashMessageWrapper').css('animationDuration').length - 1)) * 1000;
+            var alignType = $('#' + id).data('align-type');
+
             if (alignType) {
                 var removeClass = animationStyleMap[alignType] ? animationStyleMap[alignType].show : null;
                 var addClass = animationStyleMap[alignType] ? animationStyleMap[alignType].hide : null;
@@ -121,7 +126,7 @@ export const name = 'flash-message-toast';
 
     function getFlashMessageCssClass(obj) {
         var alignCss = styleMap[obj.align] || styleMap['topCenter'];
-        var animationCss = animationStyleMap[obj.align] ? animationStyleMap[obj.align].show : animationStyleMap['topCenter'];
+        var animationCss = animationStyleMap[obj.align] ? animationStyleMap[obj.align].show : animationStyleMap['topCenter'].show;
         return alignCss + ' ' + animationCss;
     }
 })();
