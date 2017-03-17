@@ -31,7 +31,7 @@ export const name = 'flash-message-toast';
         },
         bottomCenter: {
             show: 'flashMessageSlideUpToShow',
-            hide: 'flashMessageSlideUpDownToHide'
+            hide: 'flashMessageSlideDownToHide'
         },
         bottomRight: {
             show: 'flashMessageSlideLeftToShow',

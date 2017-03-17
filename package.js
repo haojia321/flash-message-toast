@@ -1,6 +1,6 @@
 Package.describe({
     name: 'haojia321:flash-message-toast',
-    version: '0.0.12',
+    version: '0.1.1',
     summary: 'Responsive and Material Design. A package to display flash message or toast message.',
     git: 'https://github.com/haojia321/flash-message-toast',
     documentation: 'README.md'
