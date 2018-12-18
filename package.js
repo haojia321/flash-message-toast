@@ -1,18 +1,18 @@
 Package.describe({
     name: 'haojia321:flash-message-toast',
-    version: '0.1.2',
+    version: '0.1.7',
     summary: 'Responsive and Material Design. A package to display flash message or toast message.',
     git: 'https://github.com/haojia321/flash-message-toast',
     documentation: 'README.md'
 });
 
 Package.onUse(function(api) {
-    api.versionsFrom('1.4.2.7');
+    api.versionsFrom('1.6.1.3');
     api.use('ecmascript');
-    api.use('jquery');
-    api.use('fourseven:scss@3.13.0');
+    api.use('jquery@1.11.11');
+    //api.use('fourseven:scss@4.10.0');
     api.mainModule('flash-message-toast.js');
-    api.addFiles('flash-message-toast.scss', 'client');
+    api.addFiles('flash-message-toast.css', 'client');
     api.addAssets('close.png', 'client');
 });
 
